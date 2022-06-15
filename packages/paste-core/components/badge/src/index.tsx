@@ -47,7 +47,6 @@ export const Badge = React.forwardRef<HTMLElement, BadgeProps>(
         alignItems="center"
         as={as}
         border="unset"
-        borderRadius="borderRadius30"
         columnGap="space10"
         display="flex"
         element={element}
