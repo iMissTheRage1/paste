@@ -21,3 +21,11 @@ export interface ChatMessageMetaItemProps {
   children: NonNullable<React.ReactNode>;
   element?: string;
 }
+
+export interface ChatAttachmentProps {
+  children?: NonNullable<React.ReactNode>; //should this be required or not?
+  element?: string;
+  i18nLoadingDescription?: string; //should this be required or not?
+  i18nIconDescription?: string; //should this be required or not?
+  attachmentTitle: string;
+}

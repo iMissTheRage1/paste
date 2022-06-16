@@ -5,7 +5,7 @@ import {Box} from '@twilio-paste/box';
 import {HelpText} from '@twilio-paste/help-text';
 import {Button} from '@twilio-paste/button';
 import type {StoryFn} from '@storybook/react';
-import {ChatMessage, ChatBubble, ChatMessageMeta, ChatMessageMetaItem} from '../src';
+import {ChatMessage, ChatBubble, ChatMessageMeta, ChatMessageMetaItem, ChatAttachment} from '../src';
 
 // eslint-disable-next-line import/no-default-export
 export default {
@@ -185,4 +185,17 @@ export const CustomizedMessages: StoryFn = () => (
       </ChatMessage>
     </Box>
   </CustomizationProvider>
+);
+
+// i want to give this story a state so you can see it flipping from spinner to file icon
+export const InboundChatMessageWithAttachment: StoryFn = () => (
+  <ChatMessage variant="inbound">
+    <ChatBubble>
+      <ChatAttachment
+        i18nIconDescription="file attached"
+        i18nLoadingDescription="loading attachment"
+        attachmentTitle="Document"
+      />
+    </ChatBubble>
+  </ChatMessage>
 );
