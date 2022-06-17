@@ -5,6 +5,7 @@ import {Box} from '@twilio-paste/box';
 import {HelpText} from '@twilio-paste/help-text';
 import {Spinner} from '@twilio-paste/spinner';
 import {Button} from '@twilio-paste/button';
+import {Stack} from '@twilio-paste/stack';
 import {DownloadIcon} from '@twilio-paste/icons/esm/DownloadIcon';
 
 import type {StoryFn} from '@storybook/react';
@@ -201,28 +202,40 @@ export const CustomizedMessages: StoryFn = () => (
 
 // i want to give this story a state so you can see it flipping from spinner to file icon
 export const InboundChatMessageWithAttachment: StoryFn = () => (
-  <Box>
-    <ChatMessage variant="inbound">
-      <ChatBubble>
-        <ChatAttachment attachmentIcon={DownloadIcon}>
-          <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
-          <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
-        </ChatAttachment>
-      </ChatBubble>
-    </ChatMessage>
-    <ChatMessage variant="outbound">
-      <ChatBubble>
-        <ChatAttachment attachmentIcon={DownloadIcon}>
-          <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
-          <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
-        </ChatAttachment>
-      </ChatBubble>
-    </ChatMessage>
-    <ChatAttachmentContainer>
+  <ChatMessage variant="inbound">
+    <ChatBubble>
+      <ChatAttachment attachmentIcon={DownloadIcon}>
+        <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
+        <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
+      </ChatAttachment>
+    </ChatBubble>
+  </ChatMessage>
+);
+
+export const OutboundChatMessageWithAttachment: StoryFn = () => (
+  <ChatMessage variant="outbound">
+    <ChatBubble>
+      <ChatAttachment attachmentIcon={DownloadIcon}>
+        <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
+        <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
+      </ChatAttachment>
+    </ChatBubble>
+  </ChatMessage>
+);
+
+export const AttachmentContainerForComposer: StoryFn = () => (
+  <Stack orientation="vertical" spacing="space60">
+    <ChatAttachmentContainer loading>
       <ChatAttachment attachmentIcon={Spinner}>
         <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
         <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
       </ChatAttachment>
     </ChatAttachmentContainer>
-  </Box>
+    <ChatAttachmentContainer>
+      <ChatAttachment attachmentIcon={DownloadIcon}>
+        <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
+        <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
+      </ChatAttachment>
+    </ChatAttachmentContainer>
+  </Stack>
 );

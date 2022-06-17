@@ -16,9 +16,9 @@ import type {
 } from './types';
 
 const ChatAttachmentLink = React.forwardRef<HTMLElement, ChatAttachmentLinkProps>(
-  ({children, href, element = 'CHAT_ATTACHMENT_LINK'}) => {
+  ({children, href, element = 'CHAT_ATTACHMENT_LINK', ...props}, ref) => {
     return (
-      <Anchor href={href} element={element}>
+      <Anchor href={href} ref={ref} element={element} {...props}>
         <Truncate title={children}>{children}</Truncate>
       </Anchor>
     );
@@ -28,9 +28,17 @@ const ChatAttachmentLink = React.forwardRef<HTMLElement, ChatAttachmentLinkProps
 ChatAttachmentLink.displayName = 'ChatAttachmentLink';
 
 const ChatAttachmentDescription = React.forwardRef<HTMLElement, ChatAttachmentDescriptionProps>(
-  ({children, element = 'CHAT_ATTACHMENT_DESCRIPTION'}) => {
+  ({children, element = 'CHAT_ATTACHMENT_DESCRIPTION', ...props}, ref) => {
     return (
-      <Text element={element} as="div" fontSize="fontSize20" color="colorTextWeaker" lineHeight="lineHeight10">
+      <Text
+        element={element}
+        ref={ref}
+        as="div"
+        fontSize="fontSize20"
+        color="colorTextWeaker"
+        lineHeight="lineHeight10"
+        {...props}
+      >
         {children}
       </Text>
     );
@@ -40,13 +48,15 @@ const ChatAttachmentDescription = React.forwardRef<HTMLElement, ChatAttachmentDe
 ChatAttachmentDescription.displayName = 'ChatAttachmentDescription';
 
 const ChatAttachment = React.forwardRef<HTMLDivElement, ChatAttachmentProps>(
-  ({children, element = 'CHAT_ATTACHMENT', attachmentIcon: AttachmentIcon}) => {
+  ({children, element = 'CHAT_ATTACHMENT', attachmentIcon: AttachmentIcon, ...props}, ref) => {
     return (
-      <MediaObject as="div" verticalAlign="center" element={element}>
-        <MediaFigure as="div" spacing="space40">
+      <MediaObject as="div" ref={ref} verticalAlign="center" element={element} {...props}>
+        <MediaFigure element={`${element}_ICON`} as="div" spacing="space40">
           <AttachmentIcon decorative />
         </MediaFigure>
-        <MediaBody as="div">{children}</MediaBody>
+        <MediaBody as="div" element={`${element}_BODY`}>
+          {children}
+        </MediaBody>
       </MediaObject>
     );
   }
@@ -63,9 +73,10 @@ ChatAttachment.propTypes = {
 };
 
 const ChatAttachmentContainer = React.forwardRef<HTMLDivElement, ChatAttachmentContainerProps>(
-  ({children, loading, element = 'CHAT_ATTACHMENT_CONTAINER'}) => {
+  ({children, loading, element = 'CHAT_ATTACHMENT_CONTAINER', ...props}, ref) => {
     return (
       <Box
+        ref={ref}
         padding="space30"
         borderStyle="solid"
         borderColor="colorBorderWeaker"
@@ -76,6 +87,7 @@ const ChatAttachmentContainer = React.forwardRef<HTMLDivElement, ChatAttachmentC
         display="inline-block"
         width="100%"
         element={element}
+        {...props}
       >
         {children}
         {!loading && (

@@ -2,7 +2,17 @@ import * as React from 'react';
 import {screen, render} from '@testing-library/react';
 // @ts-ignore typescript doesn't like js imports
 import axe from '../../../../../.jest/axe-helper';
-import {ChatMessage, ChatBubble, ChatMessageMeta, ChatMessageMetaItem} from '../src';
+import {
+  ChatMessage,
+  ChatBubble,
+  ChatMessageMeta,
+  ChatMessageMetaItem,
+  ChatAttachment,
+  ChatAttachmentLink,
+  ChatAttachmentDescription,
+} from '../src';
+
+import {DownloadIcon} from '@twilio-paste/icons/esm/DownloadIcon';
 
 describe('ChatMessage', () => {
   it('should render a list element', () => {
@@ -19,6 +29,20 @@ describe('ChatBubble', () => {
       </ChatMessage>
     );
     expect(screen.getByText('test')).toBeDefined();
+  });
+});
+
+describe('ChatAttachment', () => {
+  it('should render an icon, anchor, and text', () => {
+    const {container} = render(
+      <ChatAttachment attachmentIcon={DownloadIcon}>
+        <ChatAttachmentLink href="www.google.com">document</ChatAttachmentLink>
+        <ChatAttachmentDescription>description</ChatAttachmentDescription>
+      </ChatAttachment>
+    );
+    expect(container.querySelector('[data-paste-element="ICON"]')).toBeDefined();
+    expect(screen.getByRole('link')).toBeDefined();
+    expect(screen.getByText('description')).toBeDefined();
   });
 });
 
