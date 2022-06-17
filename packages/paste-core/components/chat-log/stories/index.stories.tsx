@@ -3,9 +3,21 @@ import {CustomizationProvider} from '@twilio-paste/customization';
 import {Avatar} from '@twilio-paste/avatar';
 import {Box} from '@twilio-paste/box';
 import {HelpText} from '@twilio-paste/help-text';
+import {Spinner} from '@twilio-paste/spinner';
 import {Button} from '@twilio-paste/button';
+import {DownloadIcon} from '@twilio-paste/icons/esm/DownloadIcon';
+
 import type {StoryFn} from '@storybook/react';
-import {ChatMessage, ChatBubble, ChatMessageMeta, ChatMessageMetaItem, ChatAttachment} from '../src';
+import {
+  ChatMessage,
+  ChatBubble,
+  ChatMessageMeta,
+  ChatMessageMetaItem,
+  ChatAttachment,
+  ChatAttachmentContainer,
+  ChatAttachmentLink,
+  ChatAttachmentDescription,
+} from '../src';
 
 // eslint-disable-next-line import/no-default-export
 export default {
@@ -189,13 +201,28 @@ export const CustomizedMessages: StoryFn = () => (
 
 // i want to give this story a state so you can see it flipping from spinner to file icon
 export const InboundChatMessageWithAttachment: StoryFn = () => (
-  <ChatMessage variant="inbound">
-    <ChatBubble>
-      <ChatAttachment
-        i18nIconDescription="file attached"
-        i18nLoadingDescription="loading attachment"
-        attachmentTitle="Document"
-      />
-    </ChatBubble>
-  </ChatMessage>
+  <Box>
+    <ChatMessage variant="inbound">
+      <ChatBubble>
+        <ChatAttachment attachmentIcon={DownloadIcon}>
+          <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
+          <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
+        </ChatAttachment>
+      </ChatBubble>
+    </ChatMessage>
+    <ChatMessage variant="outbound">
+      <ChatBubble>
+        <ChatAttachment attachmentIcon={DownloadIcon}>
+          <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
+          <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
+        </ChatAttachment>
+      </ChatBubble>
+    </ChatMessage>
+    <ChatAttachmentContainer>
+      <ChatAttachment attachmentIcon={Spinner}>
+        <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
+        <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
+      </ChatAttachment>
+    </ChatAttachmentContainer>
+  </Box>
 );

@@ -1,31 +1,48 @@
+import type {AnchorProps} from '@twilio-paste/anchor';
+import type {BoxElementProps} from '@twilio-paste/box';
+import type {GenericIconProps} from '@twilio-paste/icons/esm/types';
+
 export type MessageVariants = 'inbound' | 'outbound';
 
 export interface ChatMessageProps {
   children?: React.ReactNode;
   variant: MessageVariants;
-  element?: string;
+  element?: BoxElementProps['element'];
 }
 
 export interface ChatBubbleProps {
   children?: React.ReactNode;
-  element?: string;
+  element?: BoxElementProps['element'];
 }
 
 export interface ChatMessageMetaProps {
   ['aria-label']: string;
   children: NonNullable<React.ReactNode>;
-  element?: string;
+  element?: BoxElementProps['element'];
 }
 
 export interface ChatMessageMetaItemProps {
   children: NonNullable<React.ReactNode>;
-  element?: string;
+  element?: BoxElementProps['element'];
 }
 
 export interface ChatAttachmentProps {
+  children: NonNullable<React.ReactNode>; //should this be required or not?
+  element?: BoxElementProps['element'];
+  attachmentIcon: React.FC<GenericIconProps>;
+}
+
+export interface ChatAttachmentContainerProps {
   children?: NonNullable<React.ReactNode>; //should this be required or not?
-  element?: string;
-  i18nLoadingDescription?: string; //should this be required or not?
-  i18nIconDescription?: string; //should this be required or not?
-  attachmentTitle: string;
+  element?: BoxElementProps['element'];
+  loading?: boolean;
+}
+
+export interface ChatAttachmentLinkProps extends AnchorProps {
+  children: string;
+  element?: BoxElementProps['element'];
+}
+export interface ChatAttachmentDescriptionProps {
+  children: string;
+  element?: BoxElementProps['element'];
 }
