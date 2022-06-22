@@ -3,8 +3,9 @@ import * as PropTypes from 'prop-types';
 import {Anchor} from '@twilio-paste/anchor';
 import {Button} from '@twilio-paste/button';
 import {Box} from '@twilio-paste/box';
-import {CloseIcon} from '@twilio-paste/icons/esm/CloseIcon';
+import {CloseCircleIcon} from '@twilio-paste/icons/esm/CloseCircleIcon';
 import {MediaObject, MediaFigure, MediaBody} from '@twilio-paste/media-object';
+import {ScreenReaderOnly} from '@twilio-paste/screen-reader-only';
 import {Text} from '@twilio-paste/text';
 import {Truncate} from '@twilio-paste/truncate';
 
@@ -73,7 +74,17 @@ ChatAttachment.propTypes = {
 };
 
 const ChatAttachmentContainer = React.forwardRef<HTMLDivElement, ChatAttachmentContainerProps>(
-  ({children, loading, element = 'CHAT_ATTACHMENT_CONTAINER', ...props}, ref) => {
+  (
+    {
+      children,
+      loading,
+      onDismiss,
+      i18nDismissLabel = 'dismiss attachment',
+      element = 'CHAT_ATTACHMENT_CONTAINER',
+      ...props
+    },
+    ref
+  ) => {
     return (
       <Box
         ref={ref}
@@ -91,10 +102,22 @@ const ChatAttachmentContainer = React.forwardRef<HTMLDivElement, ChatAttachmentC
       >
         {children}
         {!loading && (
-          <Box position="absolute" top="space0" right="space0" transform="translate(50%, -50%)">
-            {/* round button goes here */}
-            <Button variant="secondary" size="icon_small">
-              <CloseIcon decorative={false} title="close" />
+          <Box
+            backgroundColor="colorBackgroundBody"
+            borderRadius="borderRadiusCircle"
+            position="absolute"
+            top="space0"
+            right="space0"
+            transform="translate(50%, -50%)"
+          >
+            <Button
+              element={`${element}_CLOSE_BUTTON`}
+              variant="secondary_icon"
+              size="icon_small"
+              onClick={() => onDismiss()}
+            >
+              <CloseCircleIcon decorative element={`${element}_CLOSE_ICON`} />
+              <ScreenReaderOnly>{i18nDismissLabel}</ScreenReaderOnly>
             </Button>
           </Box>
         )}
@@ -106,7 +129,7 @@ const ChatAttachmentContainer = React.forwardRef<HTMLDivElement, ChatAttachmentC
 ChatAttachmentContainer.displayName = 'ChatAttachmentContainer';
 
 ChatAttachmentContainer.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
   element: PropTypes.string,
 };
 

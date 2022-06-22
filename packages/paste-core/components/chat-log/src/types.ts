@@ -27,15 +27,17 @@ export interface ChatMessageMetaItemProps {
 }
 
 export interface ChatAttachmentProps {
-  children: NonNullable<React.ReactNode>; //should this be required or not?
+  children: NonNullable<React.ReactNode>;
   element?: BoxElementProps['element'];
   attachmentIcon: React.FC<GenericIconProps>;
 }
 
 export interface ChatAttachmentContainerProps {
-  children?: NonNullable<React.ReactNode>; //should this be required or not?
+  children: NonNullable<React.ReactNode>;
   element?: BoxElementProps['element'];
+  i18nDismissLabel?: string;
   loading?: boolean;
+  onDismiss: () => void;
 }
 
 export interface ChatAttachmentLinkProps extends AnchorProps {

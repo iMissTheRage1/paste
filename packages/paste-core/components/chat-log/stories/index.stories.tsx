@@ -223,19 +223,46 @@ export const OutboundChatMessageWithAttachment: StoryFn = () => (
   </ChatMessage>
 );
 
-export const AttachmentContainerForComposer: StoryFn = () => (
-  <Stack orientation="vertical" spacing="space60">
-    <ChatAttachmentContainer loading>
-      <ChatAttachment attachmentIcon={Spinner}>
+const StateExampleAttachmentContainer: React.FC = () => {
+  const [loading, setLoading] = React.useState(true);
+  const attachmentIcon = loading ? () => <Spinner decorative={false} title="loading..." /> : DownloadIcon;
+
+  React.useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    if (loading) {
+      timeout = setTimeout((): void => setLoading(false), 2500);
+    }
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+    };
+  }, []);
+
+  return (
+    <ChatAttachmentContainer onDismiss={() => {}} loading={loading}>
+      <ChatAttachment attachmentIcon={attachmentIcon}>
         <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
         <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
       </ChatAttachment>
     </ChatAttachmentContainer>
-    <ChatAttachmentContainer>
+  );
+};
+
+export const AttachmentContainerForComposer: StoryFn = () => (
+  <Stack orientation="vertical" spacing="space60">
+    <ChatAttachmentContainer onDismiss={() => {}} loading>
+      <ChatAttachment attachmentIcon={() => <Spinner decorative={false} title="loading..." />}>
+        <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
+        <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
+      </ChatAttachment>
+    </ChatAttachmentContainer>
+    <ChatAttachmentContainer onDismiss={() => {}}>
       <ChatAttachment attachmentIcon={DownloadIcon}>
         <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
         <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
       </ChatAttachment>
     </ChatAttachmentContainer>
+    <StateExampleAttachmentContainer />
   </Stack>
 );

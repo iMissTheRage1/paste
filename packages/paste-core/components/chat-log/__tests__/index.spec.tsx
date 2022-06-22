@@ -10,6 +10,7 @@ import {
   ChatAttachment,
   ChatAttachmentLink,
   ChatAttachmentDescription,
+  ChatAttachmentContainer,
 } from '../src';
 
 import {DownloadIcon} from '@twilio-paste/icons/esm/DownloadIcon';
@@ -44,6 +45,17 @@ describe('ChatAttachment', () => {
     expect(screen.getByRole('link')).toBeDefined();
     expect(screen.getByText('description')).toBeDefined();
   });
+});
+
+describe('ChatAttachmentContainer', () => {
+  render(
+    <ChatAttachmentContainer onDismiss={() => {}} loading>
+      <ChatAttachment attachmentIcon={() => <Spinner decorative={false} title="loading..." />}>
+        <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
+        <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
+      </ChatAttachment>
+    </ChatAttachmentContainer>
+  );
 });
 
 describe('ChatMessageMeta', () => {
