@@ -1,6 +1,5 @@
 import type {AnchorProps} from '@twilio-paste/anchor';
 import type {BoxElementProps} from '@twilio-paste/box';
-import type {GenericIconProps} from '@twilio-paste/icons/esm/types';
 
 export type MessageVariants = 'inbound' | 'outbound';
 
@@ -32,12 +31,11 @@ export interface ChatAttachmentProps {
   attachmentIcon: NonNullable<React.ReactNode>;
 }
 
-export interface ChatAttachmentContainerProps {
+export interface ComposerAttachmentCardProps {
   children: NonNullable<React.ReactNode>;
   element?: BoxElementProps['element'];
   i18nDismissLabel?: string;
-  loading?: boolean;
-  onDismiss: () => void;
+  onDismiss?: () => void;
 }
 
 export interface ChatAttachmentLinkProps extends AnchorProps {

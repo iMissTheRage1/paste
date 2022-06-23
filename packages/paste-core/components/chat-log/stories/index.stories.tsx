@@ -15,7 +15,7 @@ import {
   ChatMessageMeta,
   ChatMessageMetaItem,
   ChatAttachment,
-  ChatAttachmentContainer,
+  ComposerAttachmentCard,
   ChatAttachmentLink,
   ChatAttachmentDescription,
 } from '../src';
@@ -78,6 +78,17 @@ export const OutboundMessageWithMeta: StoryFn = () => (
 export const KitchenSink: StoryFn = () => (
   // replace with ChatLog
   <Box as="ul">
+    <ChatMessage variant="outbound">
+      <ChatBubble>
+        <ChatAttachment attachmentIcon={<DownloadIcon decorative />}>
+          <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
+          <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
+        </ChatAttachment>
+      </ChatBubble>
+      <ChatMessageMeta aria-label="said by you at 4:32pm">
+        <ChatMessageMetaItem>4:25 PM</ChatMessageMetaItem>
+      </ChatMessageMeta>
+    </ChatMessage>
     <ChatMessage variant="inbound">
       <ChatBubble>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</ChatBubble>
       <ChatMessageMeta aria-label="said by Gibby Radki at 4:30pm">
@@ -108,6 +119,12 @@ export const KitchenSink: StoryFn = () => (
         Quisque ullamcorper ipsum vitae lorem euismod sodales. Donec a nisi eget eros laoreet pellentesque. Donec sed
         bibendum justo, at ornare mi. Sed eget tempor metus, sed sagittis lacus. Donec commodo nisi in ligula accumsan
         euismod. Nam ornare lobortis orci, eget rhoncus ligula euismod ut.{' '}
+      </ChatBubble>
+      <ChatBubble>
+        <ChatAttachment attachmentIcon={<DownloadIcon decorative />}>
+          <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
+          <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
+        </ChatAttachment>
       </ChatBubble>
       <ChatBubble>Donec sit amet orci hendrerit, varius diam in, porttitor felis.</ChatBubble>
       <ChatMessageMeta aria-label="said by Gibby Radki at 5:04pm">
@@ -200,11 +217,10 @@ export const CustomizedMessages: StoryFn = () => (
   </CustomizationProvider>
 );
 
-// i want to give this story a state so you can see it flipping from spinner to file icon
 export const InboundChatMessageWithAttachment: StoryFn = () => (
   <ChatMessage variant="inbound">
     <ChatBubble>
-      <ChatAttachment attachmentIcon={DownloadIcon}>
+      <ChatAttachment attachmentIcon={<DownloadIcon decorative />}>
         <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
         <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
       </ChatAttachment>
@@ -215,7 +231,7 @@ export const InboundChatMessageWithAttachment: StoryFn = () => (
 export const OutboundChatMessageWithAttachment: StoryFn = () => (
   <ChatMessage variant="outbound">
     <ChatBubble>
-      <ChatAttachment attachmentIcon={DownloadIcon}>
+      <ChatAttachment attachmentIcon={<DownloadIcon decorative />}>
         <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
         <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
       </ChatAttachment>
@@ -240,29 +256,29 @@ const StateExampleAttachmentContainer: React.FC = () => {
   }, []);
 
   return (
-    <ChatAttachmentContainer onDismiss={() => {}} loading={loading}>
+    <ComposerAttachmentCard onDismiss={() => {}}>
       <ChatAttachment attachmentIcon={attachmentIcon}>
         <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
         <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
       </ChatAttachment>
-    </ChatAttachmentContainer>
+    </ComposerAttachmentCard>
   );
 };
 
 export const AttachmentContainerForComposer: StoryFn = () => (
   <Stack orientation="vertical" spacing="space60">
-    <ChatAttachmentContainer onDismiss={() => {}} loading>
+    <ComposerAttachmentCard>
       <ChatAttachment attachmentIcon={<Spinner decorative={false} title="loading..." />}>
         <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
         <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
       </ChatAttachment>
-    </ChatAttachmentContainer>
-    <ChatAttachmentContainer onDismiss={() => {}}>
+    </ComposerAttachmentCard>
+    <ComposerAttachmentCard onDismiss={() => {}}>
       <ChatAttachment attachmentIcon={<DownloadIcon decorative />}>
         <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
         <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
       </ChatAttachment>
-    </ChatAttachmentContainer>
+    </ComposerAttachmentCard>
     <StateExampleAttachmentContainer />
   </Stack>
 );

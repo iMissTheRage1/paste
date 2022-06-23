@@ -13,13 +13,13 @@ import {Truncate} from '@twilio-paste/truncate';
 
 import type {
   ChatAttachmentProps,
-  ChatAttachmentContainerProps,
+  ComposerAttachmentCardProps,
   ChatAttachmentLinkProps,
   ChatAttachmentDescriptionProps,
 } from './types';
 
 /*
-These style props are specific to our CloseCircleIcon use case in ChatAttachmentContainer.
+These style props are specific to our CloseCircleIcon use case in ComposerAttachmentCard.
 
 The close button uses CloseCircleIcon and needs the Box behind it to have these styles
 because the inner part of the glyph is transparent (variant="secondary_icon").
@@ -48,6 +48,11 @@ const ChatAttachmentLink = React.forwardRef<HTMLElement, ChatAttachmentLinkProps
 
 ChatAttachmentLink.displayName = 'ChatAttachmentLink';
 
+ChatAttachmentLink.propTypes = {
+  children: PropTypes.string.isRequired,
+  element: PropTypes.string,
+};
+
 const ChatAttachmentDescription = React.forwardRef<HTMLElement, ChatAttachmentDescriptionProps>(
   ({children, element = 'CHAT_ATTACHMENT_DESCRIPTION', ...props}, ref) => {
     return (
@@ -68,6 +73,11 @@ const ChatAttachmentDescription = React.forwardRef<HTMLElement, ChatAttachmentDe
 
 ChatAttachmentDescription.displayName = 'ChatAttachmentDescription';
 
+ChatAttachmentDescription.propTypes = {
+  children: PropTypes.string.isRequired,
+  element: PropTypes.string,
+};
+
 const ChatAttachment = React.forwardRef<HTMLDivElement, ChatAttachmentProps>(
   ({children, element = 'CHAT_ATTACHMENT', attachmentIcon, ...props}, ref) => {
     return (
@@ -76,7 +86,7 @@ const ChatAttachment = React.forwardRef<HTMLDivElement, ChatAttachmentProps>(
           {attachmentIcon}
         </MediaFigure>
         <MediaBody as="div" element={`${element}_BODY`}>
-          <Stack orientation="vertical" spacing="space10">
+          <Stack element={`${element}_STACK`} orientation="vertical" spacing="space10">
             {children}
           </Stack>
         </MediaBody>
@@ -95,16 +105,9 @@ ChatAttachment.propTypes = {
   },
 };
 
-const ChatAttachmentContainer = React.forwardRef<HTMLDivElement, ChatAttachmentContainerProps>(
+const ComposerAttachmentCard = React.forwardRef<HTMLDivElement, ComposerAttachmentCardProps>(
   (
-    {
-      children,
-      loading,
-      onDismiss,
-      i18nDismissLabel = 'dismiss attachment',
-      element = 'CHAT_ATTACHMENT_CONTAINER',
-      ...props
-    },
+    {children, onDismiss, i18nDismissLabel = 'remove attachment', element = 'COMPOSER_ATTACHMENT_CARD', ...props},
     ref
   ) => {
     return (
@@ -123,7 +126,7 @@ const ChatAttachmentContainer = React.forwardRef<HTMLDivElement, ChatAttachmentC
         {...props}
       >
         {children}
-        {!loading && (
+        {onDismiss && (
           <Box
             position="absolute"
             top="space0"
@@ -132,9 +135,9 @@ const ChatAttachmentContainer = React.forwardRef<HTMLDivElement, ChatAttachmentC
             {...closeButtonBackgroundStyles}
           >
             <Button
-              element={`${element}_CLOSE_BUTTON`}
+              element={`${element}_REMOVE_ATTACHMENT_BUTTON`}
               variant="secondary_icon"
-              size="icon_small"
+              size="icon"
               onClick={() => onDismiss()}
             >
               <CloseCircleIcon decorative element={`${element}_CLOSE_ICON`} />
@@ -147,11 +150,11 @@ const ChatAttachmentContainer = React.forwardRef<HTMLDivElement, ChatAttachmentC
   }
 );
 
-ChatAttachmentContainer.displayName = 'ChatAttachmentContainer';
+ComposerAttachmentCard.displayName = 'ComposerAttachmentCard';
 
-ChatAttachmentContainer.propTypes = {
+ComposerAttachmentCard.propTypes = {
   children: PropTypes.node.isRequired,
   element: PropTypes.string,
 };
 
-export {ChatAttachment, ChatAttachmentContainer, ChatAttachmentLink, ChatAttachmentDescription};
+export {ChatAttachment, ComposerAttachmentCard, ChatAttachmentLink, ChatAttachmentDescription};

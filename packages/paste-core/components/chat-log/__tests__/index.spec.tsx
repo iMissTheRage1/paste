@@ -10,10 +10,13 @@ import {
   ChatAttachment,
   ChatAttachmentLink,
   ChatAttachmentDescription,
-  ChatAttachmentContainer,
+  ComposerAttachmentCard,
 } from '../src';
 
+import {Box} from '@twilio-paste/box';
+import {Spinner} from '@twilio-paste/spinner';
 import {DownloadIcon} from '@twilio-paste/icons/esm/DownloadIcon';
+import {Theme} from '@twilio-paste/theme';
 
 describe('ChatMessage', () => {
   it('should render a list element', () => {
@@ -36,7 +39,7 @@ describe('ChatBubble', () => {
 describe('ChatAttachment', () => {
   it('should render an icon, anchor, and text', () => {
     const {container} = render(
-      <ChatAttachment attachmentIcon={DownloadIcon}>
+      <ChatAttachment attachmentIcon={<DownloadIcon decorative />}>
         <ChatAttachmentLink href="www.google.com">document</ChatAttachmentLink>
         <ChatAttachmentDescription>description</ChatAttachmentDescription>
       </ChatAttachment>
@@ -47,15 +50,33 @@ describe('ChatAttachment', () => {
   });
 });
 
-describe('ChatAttachmentContainer', () => {
-  render(
-    <ChatAttachmentContainer onDismiss={() => {}} loading>
-      <ChatAttachment attachmentIcon={() => <Spinner decorative={false} title="loading..." />}>
-        <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
-        <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
-      </ChatAttachment>
-    </ChatAttachmentContainer>
-  );
+describe('ComposerAttachmentCard', () => {
+  it('should render a dismiss button if there is an onDismiss prop', () => {
+    render(
+      <Theme.Provider theme="default">
+        <ComposerAttachmentCard onDismiss={() => {}}>
+          <ChatAttachment attachmentIcon={<Spinner decorative={false} title="loading..." />}>
+            <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
+            <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
+          </ChatAttachment>
+        </ComposerAttachmentCard>
+      </Theme.Provider>
+    );
+    expect(screen.getByRole('button')).toBeDefined();
+  });
+  it('should not render a dismiss button if there is no onDismiss prop', () => {
+    render(
+      <Theme.Provider theme="default">
+        <ComposerAttachmentCard>
+          <ChatAttachment attachmentIcon={<DownloadIcon decorative />}>
+            <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
+            <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
+          </ChatAttachment>
+        </ComposerAttachmentCard>
+      </Theme.Provider>
+    );
+    expect(screen.queryByRole('button')).toBeNull();
+  });
 });
 
 describe('ChatMessageMeta', () => {
@@ -146,6 +167,22 @@ describe('Accessibility', () => {
           <ChatMessageMeta aria-label="said by you 2 minutes ago">
             <ChatMessageMetaItem>2 minutes ago</ChatMessageMetaItem>
           </ChatMessageMeta>
+        </ChatMessage>
+        <ChatMessage variant="inbound">
+          <ChatBubble>
+            <ChatAttachment attachmentIcon={<DownloadIcon decorative />}>
+              <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
+              <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
+            </ChatAttachment>
+          </ChatBubble>
+        </ChatMessage>
+        <ChatMessage variant="outbound">
+          <ChatBubble>
+            <ChatAttachment attachmentIcon={<DownloadIcon decorative />}>
+              <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
+              <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
+            </ChatAttachment>
+          </ChatBubble>
         </ChatMessage>
       </ul>
     );
