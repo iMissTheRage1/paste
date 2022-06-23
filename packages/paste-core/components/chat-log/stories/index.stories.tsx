@@ -225,7 +225,7 @@ export const OutboundChatMessageWithAttachment: StoryFn = () => (
 
 const StateExampleAttachmentContainer: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
-  const attachmentIcon = loading ? () => <Spinner decorative={false} title="loading..." /> : DownloadIcon;
+  const attachmentIcon = loading ? <Spinner decorative={false} title="loading..." /> : <DownloadIcon decorative />;
 
   React.useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -252,13 +252,13 @@ const StateExampleAttachmentContainer: React.FC = () => {
 export const AttachmentContainerForComposer: StoryFn = () => (
   <Stack orientation="vertical" spacing="space60">
     <ChatAttachmentContainer onDismiss={() => {}} loading>
-      <ChatAttachment attachmentIcon={() => <Spinner decorative={false} title="loading..." />}>
+      <ChatAttachment attachmentIcon={<Spinner decorative={false} title="loading..." />}>
         <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
         <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
       </ChatAttachment>
     </ChatAttachmentContainer>
     <ChatAttachmentContainer onDismiss={() => {}}>
-      <ChatAttachment attachmentIcon={DownloadIcon}>
+      <ChatAttachment attachmentIcon={<DownloadIcon decorative />}>
         <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
         <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
       </ChatAttachment>

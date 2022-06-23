@@ -29,7 +29,7 @@ export interface ChatMessageMetaItemProps {
 export interface ChatAttachmentProps {
   children: NonNullable<React.ReactNode>;
   element?: BoxElementProps['element'];
-  attachmentIcon: React.FC<GenericIconProps>;
+  attachmentIcon: NonNullable<React.ReactNode>;
 }
 
 export interface ChatAttachmentContainerProps {

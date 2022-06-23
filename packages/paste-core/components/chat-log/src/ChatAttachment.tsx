@@ -3,9 +3,11 @@ import * as PropTypes from 'prop-types';
 import {Anchor} from '@twilio-paste/anchor';
 import {Button} from '@twilio-paste/button';
 import {Box} from '@twilio-paste/box';
+import type {BoxStyleProps} from '@twilio-paste/box';
 import {CloseCircleIcon} from '@twilio-paste/icons/esm/CloseCircleIcon';
 import {MediaObject, MediaFigure, MediaBody} from '@twilio-paste/media-object';
 import {ScreenReaderOnly} from '@twilio-paste/screen-reader-only';
+import {Stack} from '@twilio-paste/stack';
 import {Text} from '@twilio-paste/text';
 import {Truncate} from '@twilio-paste/truncate';
 
@@ -15,6 +17,24 @@ import type {
   ChatAttachmentLinkProps,
   ChatAttachmentDescriptionProps,
 } from './types';
+
+/*
+These style props are specific to our CloseCircleIcon use case in ChatAttachmentContainer.
+
+The close button uses CloseCircleIcon and needs the Box behind it to have these styles
+because the inner part of the glyph is transparent (variant="secondary_icon").
+When more button variants become available, closeButtonBackgroundStyles should
+be reconsidered (and possibly removed).
+*/
+const closeButtonBackgroundStyles: BoxStyleProps = {
+  backgroundColor: 'colorBackgroundBody',
+  borderRadius: 'borderRadiusCircle',
+  width: '12px',
+  height: '12px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+};
 
 const ChatAttachmentLink = React.forwardRef<HTMLElement, ChatAttachmentLinkProps>(
   ({children, href, element = 'CHAT_ATTACHMENT_LINK', ...props}, ref) => {
@@ -49,14 +69,16 @@ const ChatAttachmentDescription = React.forwardRef<HTMLElement, ChatAttachmentDe
 ChatAttachmentDescription.displayName = 'ChatAttachmentDescription';
 
 const ChatAttachment = React.forwardRef<HTMLDivElement, ChatAttachmentProps>(
-  ({children, element = 'CHAT_ATTACHMENT', attachmentIcon: AttachmentIcon, ...props}, ref) => {
+  ({children, element = 'CHAT_ATTACHMENT', attachmentIcon, ...props}, ref) => {
     return (
       <MediaObject as="div" ref={ref} verticalAlign="center" element={element} {...props}>
         <MediaFigure element={`${element}_ICON`} as="div" spacing="space40">
-          <AttachmentIcon decorative />
+          {attachmentIcon}
         </MediaFigure>
         <MediaBody as="div" element={`${element}_BODY`}>
-          {children}
+          <Stack orientation="vertical" spacing="space10">
+            {children}
+          </Stack>
         </MediaBody>
       </MediaObject>
     );
@@ -103,12 +125,11 @@ const ChatAttachmentContainer = React.forwardRef<HTMLDivElement, ChatAttachmentC
         {children}
         {!loading && (
           <Box
-            backgroundColor="colorBackgroundBody"
-            borderRadius="borderRadiusCircle"
             position="absolute"
             top="space0"
             right="space0"
             transform="translate(50%, -50%)"
+            {...closeButtonBackgroundStyles}
           >
             <Button
               element={`${element}_CLOSE_BUTTON`}
