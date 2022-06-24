@@ -8,11 +8,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "cjs",
-    "esm",
-    "json"
-  ],
+  "files": ["cjs", "esm", "json"],
   "scripts": {
     "build": "yarn clean && NODE_ENV=production node build.js && tsc && yarn list-icons && yarn postbuild",
     "postbuild": "cp -R ./types/* ./cjs && cp -R ./types/* ./esm",
