@@ -4,6 +4,7 @@ import {Avatar} from '@twilio-paste/avatar';
 import {Box} from '@twilio-paste/box';
 import {HelpText} from '@twilio-paste/help-text';
 import {Button} from '@twilio-paste/button';
+import {ArrowDownIcon} from '@twilio-paste/icons/esm/ArrowDownIcon';
 import type {StoryFn} from '@storybook/react';
 import {ChatMessage, ChatBubble, ChatMessageMeta, ChatMessageMetaItem} from '../src';
 
@@ -11,6 +12,13 @@ import {ChatMessage, ChatBubble, ChatMessageMeta, ChatMessageMetaItem} from '../
 export default {
   title: 'Components/ChatLog',
 };
+
+export const NewMessagesButton: StoryFn = () => (
+  <Button variant="primary" size="rounded">
+    New message
+    <ArrowDownIcon decorative />
+  </Button>
+);
 
 export const InboundChatMessage: StoryFn = () => (
   <ChatMessage variant="inbound">
@@ -65,6 +73,12 @@ export const OutboundMessageWithMeta: StoryFn = () => (
 export const KitchenSink: StoryFn = () => (
   // replace with ChatLog
   <Box as="ul">
+    <Box display="flex" justifyContent="center" marginY="space50">
+      <Button variant="primary" size="rounded">
+        New message
+        <ArrowDownIcon decorative />
+      </Button>
+    </Box>
     <ChatMessage variant="inbound">
       <ChatBubble>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</ChatBubble>
       <ChatMessageMeta aria-label="said by Gibby Radki at 4:30pm">
