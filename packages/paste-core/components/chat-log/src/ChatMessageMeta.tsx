@@ -3,9 +3,14 @@ import * as PropTypes from 'prop-types';
 import {Box, safelySpreadBoxProps} from '@twilio-paste/box';
 
 import {MessageVariantContext} from './MessageVariantContext';
-import type {ChatMessageMetaProps} from './types';
 
-const ChatMessageMeta = React.forwardRef<HTMLDivElement, ChatMessageMetaProps>(
+export interface ChatMessageMetaProps {
+  ['aria-label']: string;
+  children: NonNullable<React.ReactNode>;
+  element?: string;
+}
+
+export const ChatMessageMeta = React.forwardRef<HTMLDivElement, ChatMessageMetaProps>(
   ({children, element = 'CHAT_MESSAGE_META', ...props}, ref) => {
     const variant = React.useContext(MessageVariantContext);
 
@@ -36,5 +41,3 @@ ChatMessageMeta.propTypes = {
   children: PropTypes.node.isRequired,
   element: PropTypes.string,
 };
-
-export {ChatMessageMeta};
