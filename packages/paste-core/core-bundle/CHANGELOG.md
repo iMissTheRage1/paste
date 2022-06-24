@@ -1,5 +1,22 @@
 # Change Log
 
+## 14.1.0
+
+### Minor Changes
+
+- [`39cfc65e`](https://github.com/twilio-labs/paste/commit/39cfc65ea1f44e024732390527fc139a86138a72) [#2489](https://github.com/twilio-labs/paste/pull/2489) Thanks [@shleewhite](https://github.com/shleewhite)! - [Chat Log] add a ChatLog component
+
+### Patch Changes
+
+- [`ce87a07de`](https://github.com/twilio-labs/paste/commit/ce87a07de10936cce9f3d0414bae5910e3ddbc9f) [#2476](https://github.com/twilio-labs/paste/pull/2476) Thanks [@shleewhite](https://github.com/shleewhite)! - [Truncate] fix alignment when truncate is within another component
+
+* [`eb490746c`](https://github.com/twilio-labs/paste/commit/eb490746cb957a349fb217c13b886db4a7277342) [#2480](https://github.com/twilio-labs/paste/pull/2480) Thanks [@shleewhite](https://github.com/shleewhite)! - [Theme] fix isDeprecatedTheme to only throw a console error if a theme is deprecated.
+
+* Updated dependencies [[`ce87a07de`](https://github.com/twilio-labs/paste/commit/ce87a07de10936cce9f3d0414bae5910e3ddbc9f), [`39cfc65e`](https://github.com/twilio-labs/paste/commit/39cfc65ea1f44e024732390527fc139a86138a72), [`eb490746c`](https://github.com/twilio-labs/paste/commit/eb490746cb957a349fb217c13b886db4a7277342)]:
+  - @twilio-paste/truncate@10.0.2
+  - @twilio-paste/chat-log@1.1.0
+  - @twilio-paste/theme@7.0.2
+
 ## 14.0.0
 
 ### Major Changes

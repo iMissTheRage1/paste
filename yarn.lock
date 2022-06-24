@@ -9636,7 +9636,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@twilio-paste/chat-log@^1.0.1, @twilio-paste/chat-log@workspace:packages/paste-core/components/chat-log":
+"@twilio-paste/chat-log@^1.1.0, @twilio-paste/chat-log@workspace:packages/paste-core/components/chat-log":
   version: 0.0.0-use.local
   resolution: "@twilio-paste/chat-log@workspace:packages/paste-core/components/chat-log"
   dependencies:
@@ -9644,7 +9644,7 @@ __metadata:
     "@twilio-paste/customization": ^4.0.2
     "@twilio-paste/design-tokens": ^7.3.0
     "@twilio-paste/style-props": ^5.0.2
-    "@twilio-paste/theme": ^7.0.1
+    "@twilio-paste/theme": ^7.0.2
     prop-types: ^15.7.2
     react: ^17.0.2
     react-dom: ^17.0.2
@@ -9837,7 +9837,7 @@ __metadata:
     "@twilio-paste/breadcrumb": ^7.0.1
     "@twilio-paste/button": ^10.0.1
     "@twilio-paste/card": ^5.0.1
-    "@twilio-paste/chat-log": ^1.0.1
+    "@twilio-paste/chat-log": ^1.1.0
     "@twilio-paste/checkbox": ^9.0.1
     "@twilio-paste/clipboard-copy-library": ^1.0.4
     "@twilio-paste/color-contrast-utils": ^2.0.5
@@ -9889,12 +9889,12 @@ __metadata:
     "@twilio-paste/tabs-primitive": ^0.2.8
     "@twilio-paste/text": ^6.0.1
     "@twilio-paste/textarea": ^6.0.0
-    "@twilio-paste/theme": ^7.0.1
+    "@twilio-paste/theme": ^7.0.2
     "@twilio-paste/time-picker": ^2.0.1
     "@twilio-paste/toast": ^8.0.1
     "@twilio-paste/tooltip": ^7.0.2
     "@twilio-paste/tooltip-primitive": ^0.2.9
-    "@twilio-paste/truncate": ^10.0.1
+    "@twilio-paste/truncate": ^10.0.2
     "@twilio-paste/types": ^3.1.8
     "@twilio-paste/uid-library": ^0.2.5
     "@twilio-paste/utils": ^1.1.5
@@ -11236,7 +11236,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@twilio-paste/theme@^7.0.1, @twilio-paste/theme@workspace:packages/paste-theme":
+"@twilio-paste/theme@^7.0.1, @twilio-paste/theme@^7.0.2, @twilio-paste/theme@workspace:packages/paste-theme":
   version: 0.0.0-use.local
   resolution: "@twilio-paste/theme@workspace:packages/paste-theme"
   dependencies:
@@ -11401,7 +11401,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@twilio-paste/truncate@^10.0.1, @twilio-paste/truncate@workspace:packages/paste-core/components/truncate":
+"@twilio-paste/truncate@^10.0.1, @twilio-paste/truncate@^10.0.2, @twilio-paste/truncate@workspace:packages/paste-core/components/truncate":
   version: 0.0.0-use.local
   resolution: "@twilio-paste/truncate@workspace:packages/paste-core/components/truncate"
   dependencies:
@@ -11410,7 +11410,7 @@ __metadata:
     "@twilio-paste/icons": ^8.0.2
     "@twilio-paste/style-props": ^5.0.2
     "@twilio-paste/styling-library": ^1.0.2
-    "@twilio-paste/theme": ^7.0.1
+    "@twilio-paste/theme": ^7.0.2
     "@twilio-paste/types": ^3.1.8
     prop-types: ^15.7.2
     react: ^17.0.2

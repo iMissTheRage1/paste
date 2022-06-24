@@ -1,5 +1,11 @@
 # @twilio-paste/chat-log
 
+## 1.1.0
+
+### Minor Changes
+
+- [`39cfc65e`](https://github.com/twilio-labs/paste/commit/39cfc65ea1f44e024732390527fc139a86138a72) [#2489](https://github.com/twilio-labs/paste/pull/2489) Thanks [@shleewhite](https://github.com/shleewhite)! - [Chat Log] add a ChatLog component
+
 ## 1.0.1
 
 ### Patch Changes
