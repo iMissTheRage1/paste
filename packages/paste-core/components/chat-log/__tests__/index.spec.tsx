@@ -2,21 +2,7 @@ import * as React from 'react';
 import {screen, render} from '@testing-library/react';
 // @ts-ignore typescript doesn't like js imports
 import axe from '../../../../../.jest/axe-helper';
-import {
-  ChatMessage,
-  ChatBubble,
-  ChatMessageMeta,
-  ChatMessageMetaItem,
-  ChatAttachment,
-  ChatAttachmentLink,
-  ChatAttachmentDescription,
-  ComposerAttachmentCard,
-} from '../src';
-
-import {Box} from '@twilio-paste/box';
-import {Spinner} from '@twilio-paste/spinner';
-import {DownloadIcon} from '@twilio-paste/icons/esm/DownloadIcon';
-import {Theme} from '@twilio-paste/theme';
+import {ChatMessage, ChatBubble, ChatMessageMeta, ChatMessageMetaItem} from '../src';
 
 describe('ChatMessage', () => {
   it('should render a list element', () => {
@@ -33,49 +19,6 @@ describe('ChatBubble', () => {
       </ChatMessage>
     );
     expect(screen.getByText('test')).toBeDefined();
-  });
-});
-
-describe('ChatAttachment', () => {
-  it('should render an icon, anchor, and text', () => {
-    const {container} = render(
-      <ChatAttachment attachmentIcon={<DownloadIcon decorative />}>
-        <ChatAttachmentLink href="www.google.com">document</ChatAttachmentLink>
-        <ChatAttachmentDescription>description</ChatAttachmentDescription>
-      </ChatAttachment>
-    );
-    expect(container.querySelector('[data-paste-element="ICON"]')).toBeDefined();
-    expect(screen.getByRole('link')).toBeDefined();
-    expect(screen.getByText('description')).toBeDefined();
-  });
-});
-
-describe('ComposerAttachmentCard', () => {
-  it('should render a dismiss button if there is an onDismiss prop', () => {
-    render(
-      <Theme.Provider theme="default">
-        <ComposerAttachmentCard onDismiss={() => {}}>
-          <ChatAttachment attachmentIcon={<Spinner decorative={false} title="loading..." />}>
-            <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
-            <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
-          </ChatAttachment>
-        </ComposerAttachmentCard>
-      </Theme.Provider>
-    );
-    expect(screen.getByRole('button')).toBeDefined();
-  });
-  it('should not render a dismiss button if there is no onDismiss prop', () => {
-    render(
-      <Theme.Provider theme="default">
-        <ComposerAttachmentCard>
-          <ChatAttachment attachmentIcon={<DownloadIcon decorative />}>
-            <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
-            <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
-          </ChatAttachment>
-        </ComposerAttachmentCard>
-      </Theme.Provider>
-    );
-    expect(screen.queryByRole('button')).toBeNull();
   });
 });
 
@@ -167,22 +110,6 @@ describe('Accessibility', () => {
           <ChatMessageMeta aria-label="said by you 2 minutes ago">
             <ChatMessageMetaItem>2 minutes ago</ChatMessageMetaItem>
           </ChatMessageMeta>
-        </ChatMessage>
-        <ChatMessage variant="inbound">
-          <ChatBubble>
-            <ChatAttachment attachmentIcon={<DownloadIcon decorative />}>
-              <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
-              <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
-            </ChatAttachment>
-          </ChatBubble>
-        </ChatMessage>
-        <ChatMessage variant="outbound">
-          <ChatBubble>
-            <ChatAttachment attachmentIcon={<DownloadIcon decorative />}>
-              <ChatAttachmentLink href="www.google.com">Document-FINAL.doc</ChatAttachmentLink>
-              <ChatAttachmentDescription>123 MB</ChatAttachmentDescription>
-            </ChatAttachment>
-          </ChatBubble>
         </ChatMessage>
       </ul>
     );
